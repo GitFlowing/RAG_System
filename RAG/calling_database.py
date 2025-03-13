@@ -18,7 +18,7 @@ print(f'Load Sentence Transformer in {end_time - start_time} seconds')
 
 # Define your query
 start_time = time.time()
-query_text = "Wer ist Albert Einstein?"
+query_text = "What is the definition of AI?"
 query_embedding = embedding_model.encode([query_text]).tolist()
 end_time = time.time()
 print(f'Load Embedding of query {end_time - start_time} seconds')
@@ -34,5 +34,5 @@ print(f'Load Query Search in {end_time - start_time} seconds')
 
 # Print the best results
 print("🔍 Beste Treffer:")
-for idx, doc in enumerate(results["documents"][0]):
-    print(f"{idx+1}. {doc}\n")
+for doc_id, doc in zip(results["ids"][0], results["documents"][0]):
+    print(f"ID: {doc_id} → Document: {doc}\n")

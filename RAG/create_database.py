@@ -1,17 +1,21 @@
 import os
 import chromadb
 from sentence_transformers import SentenceTransformer
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+# TODO use timestamp Data from mark
+# NOW with data with
+# Directory containing text files and vector database
+DATA_FOLDER = "./data"
+CHROMA_PATH = "./chroma_db"
 
 
 # Initialize ChromaDB (local persistent storage)
-chroma_client = chromadb.PersistentClient(path="./chroma_db")
+chroma_client = chromadb.PersistentClient(path=CHROMA_PATH)
 collection = chroma_client.get_or_create_collection(name="text_collection")
 
 # Load the embedding model (free & local)
 embedding_model = SentenceTransformer("all-MiniLM-L6-v2")  # Small & efficient model
-
-# Directory containing text files
-DATA_FOLDER = "./data"
 
 # Read all text files and store contents
 documents = []
@@ -21,8 +25,14 @@ for idx, filename in enumerate(os.listdir(DATA_FOLDER)):
         file_path = os.path.join(DATA_FOLDER, filename)
         with open(file_path, "r", encoding="utf-8") as file:
             text = file.read()
-            documents.append(text)
-            ids.append(f"doc_{idx}")
+            # Split in paragraphs
+            paragraphs = text.split("\n\n")
+            documents.extend(paragraphs)
+
+            # Create String list
+            string_list = [f"{filename[:-4]}_{num}" for num in range(len(paragraphs))]
+            ids.extend(string_list)
+    print(f'read file {idx}')
 
 # Generate embeddings
 embeddings = embedding_model.encode(documents).tolist()
@@ -31,10 +41,6 @@ embeddings = embedding_model.encode(documents).tolist()
 collection.add(documents=documents, ids=ids, embeddings=embeddings)
 
 print("✅ Vector database created and saved locally!")
-
-
-
-
 
 
 
