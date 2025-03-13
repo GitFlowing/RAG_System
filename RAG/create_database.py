@@ -2,6 +2,7 @@ import os
 import chromadb
 from sentence_transformers import SentenceTransformer
 
+
 # Initialize ChromaDB (local persistent storage)
 chroma_client = chromadb.PersistentClient(path="./chroma_db")
 collection = chroma_client.get_or_create_collection(name="text_collection")
