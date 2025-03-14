@@ -16,6 +16,7 @@ for idx, filename in enumerate(os.listdir(DATA_FOLDER)):
             # Split in paragraphs
             paragraphs = text.split("\n\n")
 
+            # Minute where the text starts (1 min or 0 min)
             start_minute = int(paragraphs[0][3:5])
             minute = 0 if start_minute==1 else -1
             for paragraph in paragraphs:

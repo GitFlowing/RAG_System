@@ -3,8 +3,6 @@ import chromadb
 from sentence_transformers import SentenceTransformer
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-# TODO use timestamp Data from mark
-# NOW with data with
 # Directory containing text files and vector database
 DATA_FOLDER = "./data"
 CHROMA_PATH = "./chroma_db"
