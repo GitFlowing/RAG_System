@@ -30,7 +30,7 @@ for idx, filename in enumerate(os.listdir(DATA_FOLDER)):
             documents.extend(paragraphs)
 
             # Create String list
-            string_list = [f"{filename[:-4]}_{num}" for num in range(len(paragraphs))]
+            string_list = [f"{filename[:-4]}_{paragraphs[num][:8]}" for num in range(len(paragraphs))]
             ids.extend(string_list)
     print(f'read file {idx}')
 
