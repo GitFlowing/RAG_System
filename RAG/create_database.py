@@ -25,6 +25,8 @@ for idx, filename in enumerate(os.listdir(DATA_FOLDER)):
         file_path = os.path.join(DATA_FOLDER, filename)
         with open(file_path, "r", encoding="utf-8") as file:
             text = file.read()
+            text = text.strip('\n')
+            text = text.strip()
             # Split in paragraphs
             paragraphs = text.split("\n\n")
             documents.extend(paragraphs)
