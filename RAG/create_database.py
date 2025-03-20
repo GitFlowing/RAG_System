@@ -27,11 +27,16 @@ for idx, filename in enumerate(os.listdir(DATA_FOLDER)):
             text = text.strip()
             # Split in paragraphs
             paragraphs = text.split("\n\n")
-            documents.extend(paragraphs)
 
             # Create String list
             string_list = [f"{filename[:-4]}_{paragraphs[num][:8]}" for num in range(len(paragraphs))]
             ids.extend(string_list)
+
+            # Cut Time from paragraphs
+            corrected_paragraphs = [paragraph[8:].strip() for paragraph in paragraphs]
+            documents.extend(corrected_paragraphs)
+
+
     print(f'read file {idx}')
 
 # Generate embeddings
