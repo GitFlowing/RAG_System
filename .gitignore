@@ -1,7 +1,7 @@
 mark_data/
 .python-version
 .env
-RAG/chroma_db
-RAG/langchain_db
-RAG/data
+RAG/chroma_db/
+RAG/langchain_db/
+RAG/data/
 RAG/faiss_index.index
